@@ -1,1 +1,1 @@
-FLAG = "OTA{}"
+FLAG = "Securinets{}"
