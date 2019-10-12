@@ -1,0 +1,9 @@
+django:
+  secret_key: "gasghasda"
+  allowed_hosts: [23.96.35.29, 127.0.0.1]
+  debug: bool
+
+slack_oauth:
+  slack_client_id: "778141674178.790932069584"
+  slack_client_secret: "cf838e5f6e02db7bdee8f037011285bf"
+
