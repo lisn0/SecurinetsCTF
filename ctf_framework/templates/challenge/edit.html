@@ -1,0 +1,11 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+    <form action ="{% url "ctf_framework:challenge#update" challenge_id %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit"/>
+    </form>
+    <a href="{% url "ctf_framework:challenge#delete" challenge_id %}">Delete</a>
+
+
+{% endblock %}

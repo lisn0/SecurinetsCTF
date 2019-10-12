@@ -1,0 +1,66 @@
+{% block content %}
+  {% if challenge.is_active or request.user.is_staff %}
+
+    <tr class="challenge-row" data-toggle="collapse" data-target="#challenge-{{ challenge.id }}"
+      class="accordion-toggle">
+      <td>
+        {% if is_solved %}
+          <span class="mr-2 badge badge-success">Solved </span>
+        {% elif challenge.author.user == request.user %}
+          <span class="mr-2 badge badge-warning">Owner </span>
+        {% endif %}
+
+        {% if not challenge.is_active %}
+          <span class="mr-2 badge badge-danger">Disabled </span>
+        {% endif %}
+
+        {% if request.user.is_staff %}
+          <a href="{% url "ctf_framework:challenge#edit" challenge.id %}">
+            {{ challenge.name }}
+          </a>
+        {% else %}
+            <span>{{ challenge.name }}</span>
+        {% endif %}
+      </td>
+      <td> {{ challenge.point_value }} </td>
+      <td>
+        {{ challenge.number_of_solves }}
+        {% if is_solved or challenge.author.user == request.user %}
+          <a class="mr-2 badge badge-info float-right"
+             href="{% url "ctf_framework:writeup#index" challenge.id %}"
+             onclick="event.stopPropagation();"
+             role="button">Writeups</a>
+        {% endif %}
+      </td>
+      <td class="d-none d-sm-table-cell"> {{ challenge.first_blood }} </td>
+      <td class="d-none d-sm-table-cell">
+        <a href="{% url "ctf_framework:profile#show" challenge.author_id %}">
+          {{ challenge.author.display_name }}
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="5" class="p-0">
+        <div id="challenge-{{ challenge.id }}" class="accordion-body collapse">
+          <div class="container p-4">
+            <div>
+              {{ challenge.description|linebreaks|urlize }}
+            </div>
+
+            <hr/>
+
+            <div>
+              Connection Info :
+              {% if "http" in challenge.connection_info %}
+                  {{ challenge.connection_info|urlize }}
+              {% else %}
+                  {{ challenge.connection_info }}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  {% endif %}
+{% endblock %}

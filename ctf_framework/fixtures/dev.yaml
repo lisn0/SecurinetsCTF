@@ -1,0 +1,17 @@
+- model: ctf_framework.category
+  pk: 1
+  fields: { name: Web,
+            description: Web,
+            created_at: "2018-05-25 11:12" }
+
+- model: ctf_framework.challenge
+  pk: 1
+  fields: { name: Banana,
+            author_id: 1,
+            description: 'A challenge',
+            flag: 'OTA{a_flag}',
+            is_active: True,
+            category_id: 1,
+            connection_info: 'nc 127.0.0.1 1337',
+            created_at: "2018-05-25 11:12",
+            number_of_solves: 0 }

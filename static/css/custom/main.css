@@ -1,0 +1,16 @@
+.center-content {
+  width: 75vw;
+  margin: 0 auto;
+}
+
+.link-success a {
+  color: white;
+}
+
+.challenge-row:hover {
+  cursor: pointer;
+}
+
+.loading {
+	display: none;
+}

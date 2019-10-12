@@ -1,0 +1,13 @@
+*.pyc
+
+# PyCharm Local
+.idea/
+
+# Virtual Environment
+ENV/
+
+# Database
+db.sqlite3
+
+# Config
+config.yaml

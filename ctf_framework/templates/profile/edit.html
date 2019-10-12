@@ -1,0 +1,17 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+    <form action ="{% url "ctf_framework:profile#update" user.id %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" class="btn btn-primary" />
+    </form>
+
+
+<hr>
+{% include "profile/theme.html" %}
+{% endblock %}
+
+{% block scripts %}
+  {% load static %}
+  <script src="{% static '/js/custom/profile.js' %}" type="text/javascript"></script>
+{% endblock %}
