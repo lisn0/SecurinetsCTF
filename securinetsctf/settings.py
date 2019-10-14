@@ -32,8 +32,7 @@ SECRET_KEY = config["django"]["secret_key"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config["django"]["debug"]
 
-ALLOWED_HOSTS = config["django"]["allowed_hosts"]
-
+ALLOWED_HOSTS = ['securinets.herokuapp.com']
 
 # Slack Authentication
 SLACK_CLIENT_ID = config["slack_oauth"]["slack_client_id"]
