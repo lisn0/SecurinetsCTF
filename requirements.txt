@@ -11,7 +11,7 @@ Markdown==3.0.1
 Pygments==2.3.1
 pytz==2017.3
 PyYAML==3.13
-requests==2.18.4
+requests==2.20.0
 six==1.11.0
 slackclient==1.2.1
 urllib3==1.22
