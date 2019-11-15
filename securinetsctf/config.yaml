@@ -1,6 +1,6 @@
 django:
   secret_key: "gasghasda"
-  allowed_hosts: [23.96.35.29, 127.0.0.1]
+  allowed_hosts: ["securinets",23.96.35.29, 127.0.0.1, "securinets.tech", "www.securinets.tech", "cont603385.mars.orderbox-dns.com","cont603385.earth.orderbox-dns.com", "cont603385.venus.orderbox-dns.com", "cont603385.mercury.orderbox-dns.com" ]
   debug: bool
 
 slack_oauth:

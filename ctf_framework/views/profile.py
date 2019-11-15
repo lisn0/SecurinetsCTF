@@ -5,6 +5,16 @@ from django.contrib import messages
 from django.db.models import Prefetch
 from ..models import TitleGrant, Solve
 
+
+from django.contrib.auth import authenticate, logout, login
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from account.forms import UserForm
+from datetime import *
+from django.contrib.auth.models import User
+from ..models import UserProfile
+
+
 @login_required()
 def show(request, user_id):
     """View a page for a single profile."""
@@ -147,3 +157,79 @@ def delete_title(request, user_id, title_id):
         pass
 
     return redirect("ctf_framework:profile#edit", user_id)
+
+
+def register_user(request):
+    registered = False
+    # POST Send registration information
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+
+        if user_form.is_valid():
+            user = user_form.save()
+            # Hash password
+            user.set_password(user.password)
+            user.is_active = True
+
+            user.save()
+            user_form = UserForm()
+            registered = True
+            userna = str(user.username)
+            user, created = User.objects.get_or_create(
+                username="{}:{}".format("Securinets", userna)
+            )
+            profile, _ = UserProfile.objects.get_or_create(user=user)
+            profile.display_name = userna
+            print(profile)
+            profile.save()
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            return HttpResponseRedirect('/')
+
+    else:
+        user_form = UserForm()
+
+    content = {
+        'forms': (user_form,),
+        'registered': registered,
+        'time_now': datetime.now(),
+    }
+
+    return render(request, 'account/register.html', content)
+
+
+def login_user(request):
+    content = {
+        'has_error': False,
+        'error_content': '',
+        'time_now': datetime.now(),
+    }
+    # POST Send registration information
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+
+
+        if user:
+            if user.is_active:
+                user, created = User.objects.get_or_create(
+                    username="{}:{}".format("Securinets", username)
+                )
+
+                # Update or create UserProfile and update display_name
+                # profile, _ = UserProfile.objects.get_or_create(user=user)
+                # profile.display_name = username
+                # profile.save()
+                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+                return HttpResponseRedirect('/')
+            else:
+                content['has_error'] = True
+                content['error_content'] = 'The account has been frozen'
+                return render(request, 'account/login.html', content)
+        else:
+            content['has_error'] = True
+            content['error_content'] = 'Incorrect username or password'
+            return render(request, 'account/login.html', content)
+
+    return render(request, 'account/login.html', content)
+

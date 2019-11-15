@@ -4,7 +4,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <title>Securinets CTF</title>
+      <title>CTF Training Platform</title>
 
       {# Load librairies #}
       {% load static %}
@@ -36,7 +36,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="{% url "ctf_framework:home#index" %}">
         <img height="42" width="42" src="{% static "img/logo.png" %}"/>
-        &nbsp;Securinets
+        &nbsp;Securinets ISI 
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse"
               data-target="#navbarSupportedContent"
@@ -89,7 +89,7 @@
             <a class="nav-item nav-link"
                href="{% url 'ctf_framework:profile#logout' %}">Logout</a>
           {% else %}
-              <a class="nav-item nav-link" href="{% url 'slack_auth' %}">Login</a>
+              <a class="nav-item nav-link" href="{% url 'ctf_framework:profile#login' %}">Login</a>
           {% endif %}
         </div>
       </div>

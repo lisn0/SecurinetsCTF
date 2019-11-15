@@ -53,4 +53,9 @@ urlpatterns = [
     path("analytics/", analytics.index, name='analytics#index'),
     path("analytics/latest_solves.json", analytics.latest_solves, name='analytics#latest_solves'),
     path("analytics/last_week.json", analytics.last_week, name='analytics#last_week'),
+    
+    #login
+    path('login/', profile.login_user, name='profile#login'),
+    path('register/', profile.register_user, name='profile#register'),
+
 ]

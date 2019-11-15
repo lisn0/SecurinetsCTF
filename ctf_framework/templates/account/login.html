@@ -1,0 +1,45 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+    <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-12 main">
+        <h3 class="page-header" style="color: #FF4C2E">land</h3>
+        <div class="card">
+            <div class="card-body">
+                <div class="d-inline-block pt-3">
+                    <div class="container">
+                        {% if has_error %}
+                            <div class="alert alert-danger" role="alert">{{ error_content }}</div>
+                        {% endif %}
+                        <form method="POST" action="{% url 'ctf_framework:profile#login' %}" enctype="multipart/form-data"
+                              class="form-horizontal">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label class="">Username</label>
+                                <div class=""><input type="text" name="username"
+                                                                               class="form-control"
+                                                                               placeholder="please Enter Your Username">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="">password</label>
+                                <div class=""><input type="password"
+                                                                               name="password"
+                                                                               class="form-control"
+                                                                               placeholder="please Enter Your Password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-8 col-md-offset-3 col-sm-offset-3 col-xs-offset-4">
+                                    <button type="submit" class="btn btn-primary">log In</button>
+                                    <a role="button" class="btn btn-info"
+                                       href="{% url 'ctf_framework:profile#register' %}">Register</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
